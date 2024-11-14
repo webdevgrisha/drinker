@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import getCotails from "./services/cotails-api";
 
 function App() {
-  return (
-    <>
-      
-    </>
-  )
+  getCotails("cocktails");
+  getCotails("cocktails/glasses");
+  getCotails("cocktails/categories");
+  getCotails("cocktails/11002");
+  return <></>;
 }
 
-export default App
+export default App;
