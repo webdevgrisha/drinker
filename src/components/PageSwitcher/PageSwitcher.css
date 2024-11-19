@@ -1,0 +1,17 @@
+.page-switcher {
+    grid-column: 1 / -1;
+    justify-self: center;
+    align-self: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.page-switcher span {
+    font-size: 18px;
+    font-weight: bold;
+}

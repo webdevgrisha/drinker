@@ -1,13 +1,40 @@
 import { error } from "firebase-functions/logger";
+import { LoaderFunctionArgs } from "react-router-dom";
 
-async function getCotails(backPoint: string) {
-    const response = await fetch(`https://cocktails.solvro.pl/api/v1/${backPoint}`);
+// interface SearchParams {
+//     term: string;
+//     page: string;
+// }
+
+async function getCotails(endPoint: string) {
+
+    console.log('endPoint: ', endPoint);
+    const response = await fetch(`https://cocktails.solvro.pl/api/v1${endPoint}`);
 
     if (response.ok) {
         const json = await response.json();
 
 
-        console.log(`${backPoint}:`, json);
+        console.log(`${endPoint}:`, json);
+
+        return json;
+    } else {
+        console.log('error: ', response.status)
+    }
+
+}
+
+async function getData(endPoint: string) {
+
+    const response = await fetch(`https://cocktails.solvro.pl/api/v1${endPoint}`);
+
+    if (response.ok) {
+        const json = await response.json();
+
+
+        console.log(`${endPoint}:`, json);
+
+        return json;
     } else {
         console.log('error: ', response.status)
     }
@@ -15,5 +42,7 @@ async function getCotails(backPoint: string) {
 }
 
 
+getData('/ingredients');
+getData('/ingredients/types');
 
 export default getCotails;
