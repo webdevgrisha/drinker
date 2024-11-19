@@ -8,9 +8,9 @@ function RootLayout() {
         <div className="root-container">
           <div className="logo">Drinker</div>
           <nav>
-            <NavLink to="/coctails">Coctails</NavLink>
+            <NavLink to="/cocktails">Coctails</NavLink>
             <NavLink to="/ingredients">Ingredients</NavLink>
-            <NavLink to="#">Ulubiony</NavLink>
+            <NavLink to="/liked">Ulubiony</NavLink>
           </nav>
         </div>
       </header>
