@@ -1,4 +1,5 @@
 .card-preview {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -35,4 +36,33 @@
 
 .card-preview .category {
     font-size: 13px;
+}
+
+.card-preview .heart {
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+}
+
+.card-preview .heart>svg {
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-preview .heart.hide>svg {
+    opacity: 0;
+}
+
+.card-preview .heart:hover svg>path,
+.card-preview .heart.liked svg>path {
+    fill: #FF4C4C;
+}
+
+
+.card-preview .heart>svg>path {
+    fill: #fff;
+    transition: all 0.4s ease;
 }
