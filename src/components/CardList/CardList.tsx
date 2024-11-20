@@ -1,16 +1,22 @@
 import "./CardList.css";
-import { PageData, ResponseData } from "../interfaces";
+import { CocktailPrewData, ResponseData } from "../interfaces";
 import getCotails from "../../services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
 import Card from "../Card/Card";
 import PageSwitcher from "../PageSwitcher/PageSwitcher";
 import Loader from "../Loader/Loader";
-import { useLocation, useSearchParams } from "react-router-dom";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 
-async function getCards({ queryKey }: { queryKey: [string, string] }) {
-  const [pathname, search] = queryKey;
-  const response = await getCotails(pathname + search);
+async function getCards({ queryKey }: { queryKey: [string] }) {
+  const [search] = queryKey;
+  const response = await getCotails(`/cocktails/${search}`);
 
   return response;
 }
@@ -18,18 +24,13 @@ async function getCards({ queryKey }: { queryKey: [string, string] }) {
 function CardList() {
   const location = useLocation();
 
-  const { pathname, search } = location;
+  const { search } = location;
 
-  const { data, isLoading, error } = useQuery([pathname, search], getCards);
+  const { data, isLoading, error } = useQuery([search], getCards);
 
   if (error) return <p>Error loading data.</p>;
 
-  const cards = data as ResponseData;;
-  console.log("Bobr: ", cards);
-
-  const handleCardClick = (id: number) => {
-    
-  }
+  const cards = data as ResponseData;
 
   return (
     <>
@@ -38,11 +39,17 @@ function CardList() {
       ) : (
         <div className="card-list">
           {cards.data.map((cocktailData) => {
-            return <Card key={cocktailData.id} data={cocktailData} />;
+            return (
+              <Card
+                key={cocktailData.id}
+                data={cocktailData}
+              />
+            );
           })}
         </div>
       )}
-      <PageSwitcher metaData={cards?.meta || null}/>
+      <PageSwitcher metaData={cards?.meta || null} />
+      <Outlet />
     </>
   );
 }

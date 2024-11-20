@@ -1,3 +1,4 @@
+import { SVG_Logo } from "@/assets";
 import "./RootLayout.css";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -6,7 +7,10 @@ function RootLayout() {
     <>
       <header className="root-header">
         <div className="root-container">
-          <div className="logo">Drinker</div>
+          <div className="logo">
+            <span className="icon"><SVG_Logo /></span>
+            Drinker
+          </div>
           <nav>
             <NavLink to="/cocktails">Coctails</NavLink>
             <NavLink to="/ingredients">Ingredients</NavLink>

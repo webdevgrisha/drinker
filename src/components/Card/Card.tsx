@@ -1,24 +1,33 @@
 import "./Card.css";
-import { CoctailData } from "../interfaces";
+import { CocktailPrewData } from "../interfaces";
 import { SVG_Heart } from "@/assets";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
+import { useLocation, useNavigate } from "react-router-dom";
+import useIsLiked from "@/hooks/useLiked";
 
 interface CardProps {
-  data: CoctailData;
+  data: CocktailPrewData;
 }
 
 function Card({ data }: CardProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { search } = location;
+
   const { category, imageUrl, name, id } = data;
 
   const [showHeart, setShowHeart] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<string | null>(() =>
-    localStorage.getItem(id.toString())
-  );
+  const { isLiked, toggleLike } = useIsLiked(id.toString());
 
   const handleMouseEnter = () => setShowHeart(true);
 
   const handleMouseLeave = () => setShowHeart(false);
+
+  const handleCardClick = () => {
+    navigate(`${id}/${search}`);
+  };
 
   const heartClasses = classNames({
     heart: true,
@@ -26,16 +35,9 @@ function Card({ data }: CardProps) {
     liked: !!isLiked,
   });
 
-  const handleHeartClick = () => {
-    const item = localStorage.getItem(id.toString());
-
-    if (item === null) {
-      localStorage.setItem(id.toString(), "true");
-      setIsLiked("true");
-    } else {
-      delete localStorage[id.toString()];
-      setIsLiked(null);
-    }
+  const handleHeartClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
+    toggleLike();
   };
 
   return (
@@ -43,6 +45,7 @@ function Card({ data }: CardProps) {
       className="card-preview"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleCardClick}
     >
       <div className="image">
         <img src={imageUrl} alt={name} />

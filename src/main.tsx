@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import { CocktailsLayout, RootLayout } from "./layouts/index.ts";
 // import getCotails from "./services/cotails-api.ts";
-import { CardList } from "./components/index.ts";
+import { CardList, CocktailsModalWindow } from "./components/index.ts";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +22,22 @@ const router = createBrowserRouter([
         element: <Navigate to="cocktails/?page=1" />,
       },
       {
-        path: "cocktails/*",
+        path: "cocktails/",
         element: <CocktailsLayout />,
         children: [
           {
             index: true,
             element: <CardList />,
+          },
+          {
+            path: ':id/*',
+            element: <CardList />,
+            children: [
+              {
+                index: true,
+                element: <CocktailsModalWindow />,
+              },
+            ],
           },
         ],
       },

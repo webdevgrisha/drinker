@@ -10,7 +10,7 @@ interface PageData {
     total: number;
 }
 
-interface CoctailData {
+interface CocktailPrewData {
     alcoholic: boolean;
     category: string;
     createdAt: string;
@@ -22,13 +22,41 @@ interface CoctailData {
     updatedAt: string;
 }
 
+interface CocktailData {
+    alcoholic: boolean;
+    category: string;
+    createdAt: string;
+    glass: string;
+    id: number;
+    imageUrl: string;
+    instructions: string;
+    name: string;
+    updatedAt: string;
+    ingredients: IngredientData[];
+}
+
+interface IngredientData {
+    alcohol: boolean;
+    createdAt: string;
+    description: string | null;
+    id: number;
+    imageUrl: string | null;
+    measure: string;
+    name: string;
+    percentage: string;
+    type: string;
+    updatedAt: string
+}
+
 interface ResponseData {
-    data: CoctailData[];
+    data: CocktailPrewData[];
     meta: PageData;
 }
 
 export type {
-    PageData
-    CoctailData,
+    PageData,
+    CocktailPrewData,
     ResponseData,
+    CocktailData,
+    IngredientData
 }
