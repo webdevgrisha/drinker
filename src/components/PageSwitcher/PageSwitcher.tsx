@@ -24,19 +24,77 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
   console.log("metaData:", metaData);
   if (metaData === null) return null;
 
-  const { currentPage, firstPage, lastPage, previousPageUrl, nextPageUrl } =
+  const { currentPage, firstPage, lastPage } =
     metaData;
 
   console.log("metaData:", metaData);
 
-  const handlPrevNext = (value: string | null) => {
-    if (value === null) return;
-
-    navigate(value.slice(1));
-  };
-
   const handlePageClick = (page: number) => {
     setSearchParams({ page: page.toString() });
+  };
+
+  const RenderPaginationItem = () => {
+    const pageArr: number[] = [
+      currentPage - 2,
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      currentPage + 2,
+    ];
+
+    const filterPages: number[] = pageArr.filter(
+      (pageNum) => pageNum >= 1 && pageNum <= lastPage
+    );
+
+    const renderFirst: boolean = pageArr[0] - 1 >= 1;
+    const renderLast: boolean = lastPage - pageArr[4] >= 1;
+    const renderPrevEllipsis: boolean = pageArr[0] - 1 > 1;
+    const renderNextEllipsis: boolean = lastPage - pageArr[4] > 1;
+
+    return (
+      <>
+        {renderFirst && (
+          <PaginationItem>
+            <PaginationLink onClick={() => handlePageClick(firstPage)}>
+              {firstPage}
+            </PaginationLink>
+          </PaginationItem>
+        )}
+
+        {renderPrevEllipsis && (
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+        )}
+
+        {filterPages.map((pageNum) => {
+          return (
+            <PaginationItem>
+              <PaginationLink
+                onClick={() => handlePageClick(pageNum)}
+                isActive={pageNum === currentPage}
+              >
+                {pageNum}
+              </PaginationLink>
+            </PaginationItem>
+          );
+        })}
+
+        {renderNextEllipsis && (
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+        )}
+
+        {renderLast && (
+          <PaginationItem>
+            <PaginationLink onClick={() => handlePageClick(lastPage)}>
+              {lastPage}
+            </PaginationLink>
+          </PaginationItem>
+        )}
+      </>
+    );
   };
 
   return (
@@ -45,23 +103,22 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              onClick={() => handlPrevNext(previousPageUrl)}
+              onClick={() =>
+                handlePageClick(currentPage - 1 >= 1 ? currentPage - 1 : 1)
+              }
             />
           </PaginationItem>
+
+          <RenderPaginationItem />
+
           <PaginationItem>
-            <PaginationLink onClick={() => handlePageClick(firstPage)}>{firstPage}</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          {/* <PaginationItem>
-            <PaginationLink>{currentPage + 1}</PaginationLink>
-          </PaginationItem> */}
-          <PaginationItem>
-            <PaginationLink onClick={() => handlePageClick(lastPage)}>{lastPage}</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext onClick={() => handlPrevNext(nextPageUrl)} />
+            <PaginationNext
+              onClick={() =>
+                handlePageClick(
+                  currentPage + 1 <= lastPage ? currentPage + 1 : lastPage
+                )
+              }
+            />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

@@ -35,7 +35,9 @@
 }
 
 .card-preview .category {
-    font-size: 13px;
+    font-size: 14px;
+    color: #78716c;
+    font-weight: 500;
 }
 
 .card-preview .heart {
@@ -45,24 +47,30 @@
     top: 10px;
 }
 
-.card-preview .heart>svg {
-    opacity: 1;
+.card-preview .heart svg {
     width: 40px;
     height: 40px;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.card-preview .heart.hide>svg {
+.card-preview .heart:hover svg {
+    filter: drop-shadow(0px 2px 4px rgba(255, 0, 0, 0.3));
+}
+
+.card-preview .heart:active svg {
+    transform: scale(0.9);
+    filter: drop-shadow(0px 1px 2px rgba(255, 0, 0, 0.7));
+}
+
+.card-preview .heart.hide svg {
     opacity: 0;
 }
 
-.card-preview .heart:hover svg>path,
-.card-preview .heart.liked svg>path {
-    fill: #FF4C4C;
+.card-preview .heart.liked svg path {
+    fill: #dc2626;
 }
 
-
-.card-preview .heart>svg>path {
+.card-preview .heart svg path {
     fill: #fff;
-    transition: all 0.4s ease;
+    transition: fill 0.4s ease;
 }
