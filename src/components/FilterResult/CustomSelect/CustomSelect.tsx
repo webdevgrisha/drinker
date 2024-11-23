@@ -25,7 +25,6 @@ async function getDataForFilter({
 }) {
   const [path] = queryKey;
 
-  console.log("search: ", path);
   const response = getCotails(`${path}`);
 
   return response;
@@ -38,11 +37,7 @@ function CustomSelect({
   placeholder,
   options = [],
 }: CustomSelectProps) {
-  console.log("value: ", value);
-
   const { data, error } = useQuery([path], getDataForFilter);
-
-  console.log("data: ", { data, error });
 
   const dataParse: undefined | string[] = data?.data;
 

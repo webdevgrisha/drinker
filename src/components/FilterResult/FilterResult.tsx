@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import "./FilterResult.css";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import useFavoritesId from "@/hooks/useFavoritesId";
 
 interface FilterData {
   name?: string | null;
@@ -21,7 +22,10 @@ function FilterResult() {
     category: null,
     alcoholic: null,
   });
+  const { pathname } = useLocation();
+  const favoritesId = useFavoritesId();
 
+  const coctailPath: string = pathname.split("/")[1];
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleFilterDataChange = (name: keyof FilterData, value: string) => {
@@ -38,6 +42,12 @@ function FilterResult() {
     });
   }, []);
 
+  useEffect(() => {
+    if (coctailPath === "favourites") {
+      setSearchParams({ id: favoritesId });
+    }
+  }, [favoritesId]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -45,9 +55,11 @@ function FilterResult() {
       Object.entries(filterData).filter(([_, value]) => value !== null)
     );
 
-    console.log("refactorObj: ", refactorObj);
-
-    setSearchParams(refactorObj);
+    if (coctailPath === "favourites") {
+      setSearchParams({ ...refactorObj, id: favoritesId });
+    } else {
+      setSearchParams(refactorObj);
+    }
   };
 
   return (
@@ -77,7 +89,7 @@ function FilterResult() {
         value={filterData.alcoholic || ""}
         setValue={(value: string) => handleFilterDataChange("alcoholic", value)}
       />
-      <Button className="apply-filters 221.2 83.2% 53.3%">Filter</Button>
+      <Button className="apply-filters">Filter</Button>
     </form>
   );
 }

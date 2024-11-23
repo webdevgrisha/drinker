@@ -19,12 +19,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: space-between;
     max-height: 90vh;
     height: auto;
     width: auto;
-    /* max-width: 60%; */
     opacity: 1;
     transition: all 0.4s;
     background-color: #E1D4C9;
@@ -33,11 +31,6 @@
     overflow: hidden;
 }
 
-/* .cocktail-wrapper .cocktail-card > * {
-    flex: 0 0 auto;
-    max-height: 30%; 
-} */
-
 .cocktail-wrapper .cocktail-card.hide {
     width: 0;
     height: 0;
@@ -45,20 +38,18 @@
 }
 
 .cocktail-wrapper .cocktail-card .header {
-    /* flex: 0 0 60%; */
     display: flex;
     flex-direction: row;
     gap: 25px;
     flex-wrap: wrap;
-    max-height: 40%;
+    max-height: 40vh;
 }
 
 .cocktail-wrapper .cocktail-card>.header .cocktail-img {
     display: flex;
     width: 40%;
     max-width: 50%;
-    max-height: 100%;
-    height: 22rem;
+    max-height: 35vh;
     border-radius: 25px;
     overflow: hidden;
 }
@@ -74,7 +65,7 @@
 .cocktail-wrapper .cocktail-card>.header .info-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     width: 50%;
     font-size: 18px;
     color: #403F3D;
@@ -158,13 +149,14 @@
 }
 
 .cocktail-wrapper .cocktail-card .ingredients-container {
-    /* flex: 0 0 45%; */
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     overflow-y: auto;
     gap: 20px;
+
+    max-height: 40vh;
 }
 
 .cocktail-wrapper .cocktail-card .ingredients-container::-webkit-scrollbar {
@@ -191,7 +183,7 @@
     /* flex-grow: 0; */
     height: auto;
     width: auto;
-    max-height: 22rem;
+    max-height: 20rem;
     max-width: 100%;
     color: #403F3D;
     background-color: rgb(238, 236, 236);
@@ -207,7 +199,8 @@
 
 .cocktail-wrapper .cocktail-card>.ingredients-container .ingredient-card .ingredient-img {
     width: auto;
-    height: 150px;
+    max-height: 200px;
+    height: 120px;
     overflow: hidden;
 }
 
@@ -236,6 +229,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+    max-height: 10vh;
 }
 
 .cocktail-wrapper .cocktail-card .footer>button {
@@ -256,21 +250,21 @@
 
 @media (min-width: 1920px) {
     .cocktail-wrapper .cocktail-card {
-        max-width: 50%;
-        width: 35%;
+        max-width: 80%;
+        width: 60%;
     }
 }
 
 @media (min-width: 1440px) {
     .cocktail-wrapper .cocktail-card {
-        max-width: 80%;
+        max-width: 90%;
         width: 50%;
     }
 }
 
 @media (max-width: 1440px) {
     .cocktail-wrapper .cocktail-card {
-        max-width: 80%;
+        max-width: 90%;
         width: 60%;
     }
 }

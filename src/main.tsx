@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             element: <CardList />,
           },
           {
-            path: ':id/*',
+            path: ":id/*",
             element: <CardList />,
             children: [
               {
@@ -46,8 +46,24 @@ const router = createBrowserRouter([
         element: <h3>ingridients</h3>,
       },
       {
-        path: "liked",
-        element: <h3>Liked</h3>,
+        path: "favourites/",
+        element: <CocktailsLayout />,
+        children: [
+          {
+            index: true,
+            element: <CardList />,
+          },
+          {
+            path: ":id/*",
+            element: <CardList />,
+            children: [
+              {
+                index: true,
+                element: <CocktailsModalWindow />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },

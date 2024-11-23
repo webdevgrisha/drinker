@@ -1,15 +1,23 @@
 import { FilterResult } from "@/components";
 import "./CocktailsLayout.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation,  } from "react-router-dom";
+import { useEffect } from "react";
 
 function CocktailsLayout() {
+  const { pathname } = useLocation();
+
+  const coctailPath: string = pathname.split("/")[1];
+
+  const title: string =
+    coctailPath === "cocktails" ? "Cocktails" : "Favourites";
+
   return (
     <section className="cocktails">
       <header>
-        <h1>Cocktails</h1>
+        <h1>{title}</h1>
       </header>
       <section className="filter">
-        <FilterResult />
+        <FilterResult key={coctailPath} />
       </section>
       <div className="cocktails-content">
         <Outlet />

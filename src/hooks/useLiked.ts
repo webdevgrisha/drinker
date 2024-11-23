@@ -1,29 +1,33 @@
 import { useEffect, useState } from "react";
 
 function useIsLiked(id: string) {
-    const [isLiked, setIsLiked] = useState<string | null>(() =>
-        localStorage.getItem(id)
-    );
+  const [isLiked, setIsLiked] = useState<string | null>(() =>
+    localStorage.getItem(id)
+  );
 
-    useEffect(() => {
-        const handleStorageChange = () => {
-            setIsLiked(localStorage.getItem(id));
-        };
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLiked(localStorage.getItem(id));
+    };
 
-        window.addEventListener("storage", handleStorageChange);
-        return () => window.removeEventListener("storage", handleStorageChange);
-    }, [id]);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [id]);
 
-    const toggleLike = () => {
-        if (localStorage.getItem(id)) {
-          localStorage.removeItem(id);
-        } else {
-          localStorage.setItem(id, "true");
-        }
-        setIsLiked(localStorage.getItem(id));
-      };
+  const toggleLike = () => {
+    if (localStorage.getItem(id)) {
+      localStorage.removeItem(id);
+    } else {
+      localStorage.setItem(id, "true");
+    }
 
-      return { isLiked, toggleLike };
+    window.dispatchEvent(new StorageEvent("storage"));
+
+    setIsLiked(localStorage.getItem(id));
+  };
+
+
+  return { isLiked, toggleLike };
 }
 
 export default useIsLiked;
