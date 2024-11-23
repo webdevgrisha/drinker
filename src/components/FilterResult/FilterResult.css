@@ -1,0 +1,15 @@
+.filter-result {
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.filter-result > .search-name {
+    max-width: 25%;
+}
+
+.filter-result > .apply-filters {
+    background-color: #1d4ed8;
+}

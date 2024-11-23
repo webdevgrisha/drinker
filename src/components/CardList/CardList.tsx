@@ -1,5 +1,5 @@
 import "./CardList.css";
-import { CocktailPrewData, ResponseData } from "../interfaces";
+import { ResponseData } from "../interfaces";
 import getCotails from "../../services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
 import Card from "../Card/Card";
@@ -8,11 +8,7 @@ import Loader from "../Loader/Loader";
 import {
   Outlet,
   useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 async function getCards({ queryKey }: { queryKey: [string] }) {
   const [search] = queryKey;
