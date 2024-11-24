@@ -15,3 +15,8 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.page-switcher .per-page>span {
+    font-size: 15px;
+    font-weight: 600;
+}

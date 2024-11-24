@@ -1,7 +1,6 @@
 import { FilterResult } from "@/components";
 import "./CocktailsLayout.css";
 import { Outlet, useLocation,  } from "react-router-dom";
-import { useEffect } from "react";
 
 function CocktailsLayout() {
   const { pathname } = useLocation();

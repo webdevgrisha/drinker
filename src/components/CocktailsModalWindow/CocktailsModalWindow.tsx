@@ -31,10 +31,11 @@ function CocktailsModalWindow() {
   const { isLiked, toggleLike } = useIsLiked(String(id));
 
   console.log("location: ", location);
+
+  const { data, isLoading, error } = useQuery([id || ""], getCard);
+
   if (id === undefined) return null;
-
-  const { data, isLoading, error } = useQuery([id], getCard);
-
+  
   if (error) return <p>Error loading data.</p>;
 
   if (isLoading) return <Loader />;

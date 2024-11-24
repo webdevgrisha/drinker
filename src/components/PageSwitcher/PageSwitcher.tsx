@@ -8,29 +8,45 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import "./PageSwitcher.css";
 import { PageData } from "../interfaces";
+import useCustomSearchParams from "@/hooks/useCustomSearchParams";
 
 interface PageSwitcherProps {
   metaData: PageData | null;
 }
 
 function PageSwitcher({ metaData }: PageSwitcherProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useCustomSearchParams();
 
-  console.log("metaData:", metaData);
   if (metaData === null) return null;
 
-  const { currentPage, firstPage, lastPage } =
-    metaData;
+  const perPage = searchParams.get("perPage") || '15';
 
-  console.log("metaData:", metaData);
+  console.log("perPage: ", perPage);
+
+  const { currentPage, firstPage, lastPage } = metaData;
 
   const handlePageClick = (page: number) => {
-    setSearchParams({ page: page.toString() });
+    setSearchParams({
+      page: page.toString(),
+    });
+  };
+
+  const handlePerPageChange = (value: string) => {
+    setSearchParams({
+      perPage: value,
+    });
   };
 
   const RenderPaginationItem = () => {
@@ -67,9 +83,9 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
           </PaginationItem>
         )}
 
-        {filterPages.map((pageNum) => {
+        {filterPages.map((pageNum, index) => {
           return (
-            <PaginationItem>
+            <PaginationItem key={index}>
               <PaginationLink
                 onClick={() => handlePageClick(pageNum)}
                 isActive={pageNum === currentPage}
@@ -122,6 +138,22 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
+
+      <Select value={perPage} onValueChange={handlePerPageChange}>
+        <SelectTrigger className="w-[70px] per-page" value={15}>
+          <SelectValue placeholder="15" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Cards per page</SelectLabel>
+            <SelectItem value="9">9</SelectItem>
+            <SelectItem value="15">15</SelectItem>
+            <SelectItem value="24">24</SelectItem>
+            <SelectItem value="36">36</SelectItem>
+            <SelectItem value="45">45</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
   );
 }

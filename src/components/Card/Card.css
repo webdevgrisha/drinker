@@ -36,7 +36,7 @@
 
 .card-preview .category {
     font-size: 14px;
-    color: #78716c;
+    color: #B0907A;
     font-weight: 500;
 }
 
@@ -51,6 +51,8 @@
     width: 40px;
     height: 40px;
     transition: transform 0.3s ease, filter 0.3s ease;
+    stroke: #292524;
+    stroke-width: 0.3px;
 }
 
 .card-preview .heart:hover svg {

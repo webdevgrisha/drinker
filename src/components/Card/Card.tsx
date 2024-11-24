@@ -1,7 +1,7 @@
 import "./Card.css";
 import { CocktailPrewData } from "../interfaces";
 import { SVG_Heart } from "@/assets";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
 import { useLocation, useNavigate } from "react-router-dom";
 import useIsLiked from "@/hooks/useLiked";

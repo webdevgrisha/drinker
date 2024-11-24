@@ -7,6 +7,7 @@ import "./FilterResult.css";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import useFavoritesId from "@/hooks/useFavoritesId";
+import useCustomSearchParams from "@/hooks/useCustomSearchParams";
 
 interface FilterData {
   name?: string | null;
@@ -22,11 +23,7 @@ function FilterResult() {
     category: null,
     alcoholic: null,
   });
-  const { pathname } = useLocation();
-  const favoritesId = useFavoritesId();
-
-  const coctailPath: string = pathname.split("/")[1];
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useCustomSearchParams();
 
   const handleFilterDataChange = (name: keyof FilterData, value: string) => {
     setFilterData((draft) => {
@@ -42,12 +39,6 @@ function FilterResult() {
     });
   }, []);
 
-  useEffect(() => {
-    if (coctailPath === "favourites") {
-      setSearchParams({ id: favoritesId });
-    }
-  }, [favoritesId]);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -55,11 +46,7 @@ function FilterResult() {
       Object.entries(filterData).filter(([_, value]) => value !== null)
     );
 
-    if (coctailPath === "favourites") {
-      setSearchParams({ ...refactorObj, id: favoritesId });
-    } else {
-      setSearchParams(refactorObj);
-    }
+    setSearchParams(refactorObj);
   };
 
   return (
