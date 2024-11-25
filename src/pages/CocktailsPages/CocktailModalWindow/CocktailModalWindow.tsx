@@ -1,7 +1,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -14,7 +13,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import classNames from "classnames";
 import { CocktailData, IngredientData } from "../../../components/interfaces";
-import { SVG_Arrow } from "@/assets";
 import useIsLiked from "@/hooks/useLiked";
 
 async function getCard({ queryKey }: { queryKey: [string] }) {
@@ -26,7 +24,11 @@ async function getCard({ queryKey }: { queryKey: [string] }) {
 
 function CocktailModalWindow() {
   const navigate = useNavigate();
-  const { search } = useLocation();
+  const { pathname, search } = useLocation();
+
+  const mainPath = pathname.split("/")[1];
+
+  console.log("CocktailModalWindow location: ", location);
   const { id } = useParams();
   const { isLiked, toggleLike } = useIsLiked(String(id));
 
@@ -53,7 +55,7 @@ function CocktailModalWindow() {
   } = cocktailData || {};
 
   const closeFunc = () => {
-    navigate(-1);
+    navigate(`/${mainPath}${search}`);
   };
 
   const handleLikedStateChange = () => {
@@ -84,7 +86,7 @@ function CocktailModalWindow() {
                 const measureStr = measure ? `- ${measure}` : measure;
 
                 return (
-                  <li>
+                  <li key={name}>
                     {name} <i>{measureStr}</i>
                   </li>
                 );
@@ -114,7 +116,7 @@ function CocktailModalWindow() {
 
                 if (!(name && imageUrl)) return null;
 
-                return <IngredientView {...ingredient} />;
+                return <IngredientView key={name} {...ingredient} />;
               })}
             </div>
           </div>
