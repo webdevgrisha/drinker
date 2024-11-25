@@ -1,23 +1,22 @@
-import "./CocktailList.css";
-import { ResponseData } from "../interfaces";
+import "./IngredientList.css";
 import getCotails from "../../../services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
-import CocktailCard from "../CocktailCard/CocktailCard";
 import PageSwitcher from "../../../components/PageSwitcher/PageSwitcher";
 import Loader from "../../../components/Loader/Loader";
 import { Outlet, useLocation } from "react-router-dom";
+import IngredientCard from "../IngredientCard/IngredientCard";
+import { ResponseData } from "../interfaces";
 
 async function getCards({ queryKey }: { queryKey: [string] }) {
   const [search] = queryKey;
-  const response = await getCotails(`/cocktails/${search}`);
+  const response = await getCotails(`/ingredients/${search}`);
 
   return response;
 }
 
-function CocktailList() {
+function IngredientList() {
   const location = useLocation();
 
-  console.log("location: ", location);
   const { search } = location;
 
   const { data, isLoading, error } = useQuery([search], getCards);
@@ -33,7 +32,7 @@ function CocktailList() {
       ) : (
         <div className="card-list">
           {cards.data.map((cocktailData) => {
-            return <CocktailCard key={cocktailData.id} data={cocktailData} />;
+            return <IngredientCard key={cocktailData.id} data={cocktailData} />;
           })}
         </div>
       )}
@@ -43,4 +42,4 @@ function CocktailList() {
   );
 }
 
-export default CocktailList;
+export default IngredientList;

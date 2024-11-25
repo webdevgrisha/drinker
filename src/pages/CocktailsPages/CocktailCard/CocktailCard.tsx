@@ -1,5 +1,5 @@
 import "./CocktailCard.css";
-import { CocktailPrewData } from "../../../components/interfaces";
+import { CocktailPrewData } from "../interfaces";
 import { SVG_Heart } from "@/assets";
 import { useState } from "react";
 import classNames from "classnames";
@@ -42,7 +42,7 @@ function CocktailCard({ data }: CardProps) {
 
   return (
     <div
-      className="card-preview"
+      className="cocktail-card-preview card-preview"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}

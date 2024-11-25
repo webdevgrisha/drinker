@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 import classNames from "classnames";
-import { CocktailData, IngredientData } from "../../../components/interfaces";
+import { CocktailData, IngredientData } from "../interfaces";
 import useIsLiked from "@/hooks/useLiked";
 
 async function getCard({ queryKey }: { queryKey: [string] }) {

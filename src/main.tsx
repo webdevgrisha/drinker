@@ -17,6 +17,7 @@ import {
   CocktailList,
   CocktailModalWindow,
 } from "./pages/CocktailsPages/index.ts";
+import { IngredientList } from "./pages/IngredientsPages/index.ts";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,17 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            // element: <CardList />,
+            element: <IngredientList />,
+          },
+          {
+            path: ":id/*",
+            element: <IngredientList />,
+            children: [
+              {
+                index: true,
+                element: <CocktailModalWindow />,
+              },
+            ],
           },
         ],
       },

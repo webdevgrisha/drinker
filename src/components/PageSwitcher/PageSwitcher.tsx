@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 
 import "./PageSwitcher.css";
-import { PageData } from "../interfaces";
+import { PageData } from "../../pages/CocktailsPages/interfaces";
 import useCustomSearchParams from "@/hooks/useCustomSearchParams";
 
 interface PageSwitcherProps {
@@ -31,7 +31,7 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
 
   if (metaData === null) return null;
 
-  const perPage = searchParams.get("perPage") || '15';
+  const perPage = searchParams.get("perPage") || "15";
 
   console.log("perPage: ", perPage);
 
