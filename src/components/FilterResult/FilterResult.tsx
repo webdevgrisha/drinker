@@ -4,9 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import "./FilterResult.css";
-import { useLocation, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import useFavoritesId from "@/hooks/useFavoritesId";
 import useCustomSearchParams from "@/hooks/useCustomSearchParams";
 
 interface FilterData {
@@ -14,6 +12,7 @@ interface FilterData {
   glass?: string | null;
   category?: string | null;
   alcoholic?: string | null;
+  sort?: string | null;
 }
 
 function FilterResult() {
@@ -75,6 +74,21 @@ function FilterResult() {
         options={["true", "false"]}
         value={filterData.alcoholic || ""}
         setValue={(value: string) => handleFilterDataChange("alcoholic", value)}
+      />
+      <CustomSelect
+        placeholder="Sort by"
+        options={[
+          "+name",
+          "-name",
+          "+alcoholic",
+          "-alcoholic",
+          "+category",
+          "-category",
+          "+glass",
+          "-glass",
+        ]}
+        value={filterData.sort || ""}
+        setValue={(value: string) => handleFilterDataChange("sort", value)}
       />
       <Button className="apply-filters">Filter</Button>
     </form>

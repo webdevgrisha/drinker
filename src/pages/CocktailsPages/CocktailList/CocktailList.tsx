@@ -1,14 +1,11 @@
-import "./CardList.css";
-import { ResponseData } from "../interfaces";
-import getCotails from "../../services/cotails-api";
+import "./CocktailList.css";
+import { ResponseData } from "../../../components/interfaces";
+import getCotails from "../../../services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
-import Card from "../Card/Card";
-import PageSwitcher from "../PageSwitcher/PageSwitcher";
-import Loader from "../Loader/Loader";
-import {
-  Outlet,
-  useLocation,
-} from "react-router-dom";
+import CocktailCard from "../CocktailCard/CocktailCard";
+import PageSwitcher from "../../../components/PageSwitcher/PageSwitcher";
+import Loader from "../../../components/Loader/Loader";
+import { Outlet, useLocation } from "react-router-dom";
 
 async function getCards({ queryKey }: { queryKey: [string] }) {
   const [search] = queryKey;
@@ -17,9 +14,10 @@ async function getCards({ queryKey }: { queryKey: [string] }) {
   return response;
 }
 
-function CardList() {
+function CocktailList() {
   const location = useLocation();
 
+  console.log("location: ", location);
   const { search } = location;
 
   const { data, isLoading, error } = useQuery([search], getCards);
@@ -35,12 +33,7 @@ function CardList() {
       ) : (
         <div className="card-list">
           {cards.data.map((cocktailData) => {
-            return (
-              <Card
-                key={cocktailData.id}
-                data={cocktailData}
-              />
-            );
+            return <CocktailCard key={cocktailData.id} data={cocktailData} />;
           })}
         </div>
       )}
@@ -50,4 +43,4 @@ function CardList() {
   );
 }
 
-export default CardList;
+export default CocktailList;

@@ -8,9 +8,15 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { CocktailsLayout, RootLayout } from "./layouts/index.ts";
-// import getCotails from "./services/cotails-api.ts";
-import { CardList, CocktailsModalWindow } from "./components/index.ts";
+import {
+  CocktailsLayout,
+  IngredientsLayout,
+  RootLayout,
+} from "./layouts/index.ts";
+import {
+  CocktailList,
+  CocktailModalWindow,
+} from "./pages/CocktailsPages/index.ts";
 
 const router = createBrowserRouter([
   {
@@ -27,23 +33,29 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <CardList />,
+            element: <CocktailList />,
           },
           {
             path: ":id/*",
-            element: <CardList />,
+            element: <CocktailList />,
             children: [
               {
                 index: true,
-                element: <CocktailsModalWindow />,
+                element: <CocktailModalWindow />,
               },
             ],
           },
         ],
       },
       {
-        path: "ingridients",
-        element: <h3>ingridients</h3>,
+        path: "ingredients",
+        element: <IngredientsLayout />,
+        children: [
+          {
+            index: true,
+            // element: <CardList />,
+          },
+        ],
       },
       {
         path: "favourites/",
@@ -51,15 +63,15 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <CardList />,
+            element: <CocktailList />,
           },
           {
             path: ":id/*",
-            element: <CardList />,
+            element: <CocktailList />,
             children: [
               {
                 index: true,
-                element: <CocktailsModalWindow />,
+                element: <CocktailModalWindow />,
               },
             ],
           },

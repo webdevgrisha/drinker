@@ -1,0 +1,319 @@
+.cocktail-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+    z-index: 100;
+    overflow: hidden;
+
+    transition: 0.4s all;
+}
+
+/* Card */
+.cocktail-wrapper .cocktail-card {
+    margin: auto;
+    transform: translateY(5%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 90vh;
+    /* height: 4; */
+    min-height: 30vh;
+    max-width: 50%;
+    min-width: 30%;
+    /* width: auto; */
+    opacity: 1;
+    transition: all 0.4s;
+    background-color: #E1D4C9;
+    border-radius: 25px;
+    border: none;
+    /* overflow-y: scroll; */
+}
+
+.cocktail-wrapper .cocktail-card.hide {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.cocktail-wrapper .cocktail-card .section {
+    padding: 1.5rem;
+}
+
+/* Header */
+.cocktail-wrapper .cocktail-card .header {
+    display: flex;
+    flex: 5;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    overflow: hidden;
+    padding-bottom: 0px;
+}
+
+.cocktail-wrapper .cocktail-card>.header .cocktail-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cocktail-wrapper .cocktail-card>.header .cocktail-img>img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.cocktail-wrapper .cocktail-card>.header .title {
+    font-size: 35px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+
+    color: #403F3D;
+}
+
+.cocktail-wrapper .cocktail-card>.header .close-btn {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+
+    width: 3rem;
+    height: 3rem;
+    border-radius: 150px;
+
+    border: 1px solid #8a9199;
+    background-color: transparent;
+    color: transparent;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.cocktail-wrapper .cocktail-card>.header .close-btn:before,
+.cocktail-wrapper .cocktail-card>.header .close-btn:after {
+    position: absolute;
+    width: 2rem;
+    height: 1px;
+    left: 50%;
+    top: 50%;
+    margin-left: -1rem;
+    content: '';
+    background: #8a9199;
+    transition: all ease 1s;
+}
+
+.cocktail-wrapper .cocktail-card>.header .close-btn:before {
+    transform: rotate(-45deg);
+}
+
+.cocktail-wrapper .cocktail-card>.header .close-btn:after {
+    transform: rotate(45deg);
+}
+
+.cocktail-wrapper .cocktail-card>.header .close-btn:hover,
+.cocktail-wrapper .cocktail-card>.header .close-btn:focus {
+    transform: rotate(180deg);
+    border-color: #f26a3d;
+    background: rgba(242, 106, 61, 0.1);
+
+    cursor: pointer;
+}
+
+.cocktail-wrapper .cocktail-card>.header .close-btn:hover:before,
+.cocktail-wrapper .cocktail-card>.header .close-btn:hover:after {
+    background: rgb(224, 59, 75);
+}
+
+/* CardContent */
+.cocktail-wrapper .cocktail-card .cocktail-info {
+    display: flex;
+    flex: 4;
+    flex-wrap: wrap;
+    align-self: center;
+
+    padding-top: 0px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info h4 {
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #403F3D;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .ingredients {
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-top-left-radius: 10px;
+    width: 40%;
+    min-height: 100%;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .ingredients .list {
+    color: #403F3D;
+    font-size: 16px;
+    list-style: inside;
+    font-weight: 550;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .ingredients .list i {
+    font-weight: 500;
+    color: #B0907A;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .instruction {
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-top-right-radius: 10px;
+    border-left: none;
+    min-height: 100%;
+    flex-grow: 1;
+    width: 60%;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .instruction>p {
+    font-size: 15px;
+    color: rgb(41, 41, 41);
+    font-weight: 450;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .additional-info {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-top: none;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    width: 100%;
+    min-height: 100%;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .additional-info p {
+    font-size: 15px;
+    color: #B0907A;
+    margin-bottom: 15px;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .additional-info b {
+    font-weight: 600;
+    font-size: 16px;
+    color: rgb(41, 41, 41);
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .additional-info .cocktail-additional-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.cocktail-wrapper .cocktail-card .cocktail-info .additional-info .ingredients-additional-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.cocktail-wrapper .cocktail-card .ingredient-card {
+    max-width: 120px;
+    padding: 10px 5px;
+}
+
+.cocktail-wrapper .cocktail-card .ingredient-card .name {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.cocktail-wrapper .cocktail-card .ingredient-card .ingredient-img {
+    max-height: 140px;
+    height: auto;
+}
+
+.cocktail-wrapper .cocktail-card .ingredient-card .ingredient-img>img {
+    object-fit: fill;
+}
+
+/* Footer */
+.cocktail-wrapper .cocktail-card .footer {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 0px;
+}
+
+.cocktail-wrapper .cocktail-card .footer>button {
+    padding: 1rem 2rem;
+    width: 60%;
+    border: 1px solid #665F55;
+    border-radius: 35px;
+    color: #403F3D;
+    font-weight: 700;
+
+    transition: all 0.6s;
+
+    &:hover {
+        color: #E1D4C9;
+        background-color: #403F3D;
+    }
+}
+
+@media (min-width: 1920px) {
+    .cocktail-wrapper .cocktail-card {}
+}
+
+@media (min-width: 1440px) {
+    .cocktail-wrapper .cocktail-card {}
+}
+
+@media (max-width: 1440px) {
+    .cocktail-wrapper .cocktail-card {
+        max-width: 50%;
+    }
+
+    .cocktail-wrapper .cocktail-card .cocktail-info .ingredients {
+        width: 45%;
+    }
+
+    .cocktail-wrapper .cocktail-card .cocktail-info .instruction {
+        width: 55%;
+    }
+
+    .cocktail-wrapper .cocktail-card .footer {
+        padding-bottom: 10px;
+    }
+
+    .cocktail-wrapper .cocktail-card .footer>button {
+        padding: 0.5rem 1rem;
+    }
+
+    .cocktail-wrapper .cocktail-card .header {
+        padding-bottom: 10px;
+        gap: 15px;
+    }
+
+    .cocktail-wrapper .cocktail-card>.header .title {
+        font-size: 25px;
+    }
+}

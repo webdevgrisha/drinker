@@ -1,5 +1,5 @@
-import "./Card.css";
-import { CocktailPrewData } from "../interfaces";
+import "./CocktailCard.css";
+import { CocktailPrewData } from "../../../components/interfaces";
 import { SVG_Heart } from "@/assets";
 import { useState } from "react";
 import classNames from "classnames";
@@ -10,7 +10,7 @@ interface CardProps {
   data: CocktailPrewData;
 }
 
-function Card({ data }: CardProps) {
+function CocktailCard({ data }: CardProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -60,4 +60,4 @@ function Card({ data }: CardProps) {
   );
 }
 
-export default Card;
+export default CocktailCard;

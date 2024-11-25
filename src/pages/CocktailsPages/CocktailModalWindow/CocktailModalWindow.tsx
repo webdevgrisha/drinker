@@ -7,13 +7,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import "./CocktailsModalWindow.css";
+import "./CocktailModalWindow.css";
 import getCotails from "@/services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Loader from "../Loader/Loader";
+import Loader from "../../../components/Loader/Loader";
 import classNames from "classnames";
-import { CocktailData, IngredientData } from "../interfaces";
+import { CocktailData, IngredientData } from "../../../components/interfaces";
 import { SVG_Arrow } from "@/assets";
 import useIsLiked from "@/hooks/useLiked";
 
@@ -24,7 +24,7 @@ async function getCard({ queryKey }: { queryKey: [string] }) {
   return response;
 }
 
-function CocktailsModalWindow() {
+function CocktailModalWindow() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const { id } = useParams();
@@ -35,7 +35,7 @@ function CocktailsModalWindow() {
   const { data, isLoading, error } = useQuery([id || ""], getCard);
 
   if (id === undefined) return null;
-  
+
   if (error) return <p>Error loading data.</p>;
 
   if (isLoading) return <Loader />;
@@ -53,7 +53,7 @@ function CocktailsModalWindow() {
   } = cocktailData || {};
 
   const closeFunc = () => {
-    navigate(`/cocktails/${search}`);
+    navigate(-1);
   };
 
   const handleLikedStateChange = () => {
@@ -68,37 +68,58 @@ function CocktailsModalWindow() {
     <div className="cocktail-wrapper">
       {isLoading && <Loader />}
       <Card className={cardClasses}>
-        <CardHeader className="header">
+        <CardHeader className="section header">
           <div className="cocktail-img">
             <img src={imageUrl} alt={name} />
           </div>
-          <div className="info-wrapper">
-            <CardTitle className="title">{name}</CardTitle>
-            <CardDescription className="category">{category}</CardDescription>
-            <p>
-              <b>Instructions:</b> {instructions}
-            </p>
-            <p>
-              <b>Glass:</b> {glass}
-            </p>
-            <p>
-              <b>Alcoholic:</b> {alcoholic ? "Yes" : "No"}
-            </p>
-          </div>
+          <CardTitle className="title">{name}</CardTitle>
           <button className="close-btn" onClick={closeFunc}></button>
         </CardHeader>
-        <CardContent className="ingredients-container">
-          {ingredients.map((ingredient, index) => {
-            const isLast = index === ingredients.length - 1;
-            return (
-              <>
-                <IngredientView {...ingredient} />
-                {!isLast && <SVG_Arrow />}
-              </>
-            );
-          })}
+        <CardContent className="section cocktail-info">
+          <div className="ingredients">
+            <h4>Ingredients</h4>
+            <ul className="list">
+              {ingredients.map((ingredient) => {
+                const { name, measure } = ingredient;
+                const measureStr = measure ? `- ${measure}` : measure;
+
+                return (
+                  <li>
+                    {name} <i>{measureStr}</i>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="instruction">
+            <h4>Method</h4>
+            <p>{instructions}</p>
+          </div>
+          <div className="additional-info">
+            <h4>Additional Info</h4>
+            <div className="cocktail-additional-info">
+              <p>
+                <b>Category:</b> {category}
+              </p>
+              <p>
+                <b>Glass:</b> {glass}
+              </p>
+              <p>
+                <b>Alcoholic:</b> {alcoholic ? "Yes" : "No"}
+              </p>
+            </div>
+            <div className="ingredients-additional-info">
+              {ingredients.map((ingredient) => {
+                const { name, imageUrl } = ingredient;
+
+                if (!(name && imageUrl)) return null;
+
+                return <IngredientView {...ingredient} />;
+              })}
+            </div>
+          </div>
         </CardContent>
-        <CardFooter className="footer">
+        <CardFooter className="section footer">
           <button onClick={handleLikedStateChange}>
             {buttonText} favourites
           </button>
@@ -109,26 +130,16 @@ function CocktailsModalWindow() {
 }
 
 function IngredientView(data: IngredientData) {
-  const { imageUrl, measure, name, type } = data;
-
-  const imgClass = classNames({ "ingredient-img": true, hide: !imageUrl });
+  const { imageUrl, name } = data;
 
   return (
     <Card className="ingredient-card">
-      <CardHeader>
-        <CardTitle className="name">{name}</CardTitle>
-        <CardDescription className="category">{type}</CardDescription>
-      </CardHeader>
-      <CardContent className={imgClass}>
+      <CardTitle className="name">{name}</CardTitle>
+      <div className="ingredient-img">
         {<img src={imageUrl || ""} alt={name} />}
-      </CardContent>
-      {measure && (
-        <CardFooter>
-          <p className="measure">{measure}</p>
-        </CardFooter>
-      )}
+      </div>
     </Card>
   );
 }
 
-export default CocktailsModalWindow;
+export default CocktailModalWindow;

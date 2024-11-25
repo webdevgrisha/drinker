@@ -47,7 +47,11 @@ function CustomSelect({
     if (optionArr === undefined) return "Loading data";
 
     return optionArr.map((option: string | boolean) => {
-      return <SelectItem value={String(option)}>{String(option)}</SelectItem>;
+      return (
+        <SelectItem value={String(option)}>
+          <span>{String(option)}</span>
+        </SelectItem>
+      );
     });
   };
 
