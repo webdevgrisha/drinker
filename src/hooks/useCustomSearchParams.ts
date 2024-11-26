@@ -28,10 +28,11 @@ function useCustomSearchParams(): [URLSearchParams, (newSearchParams: NewSearchP
             console.log('2')
             const prevParams = Object.fromEntries(searchParams.entries())
             setSearchParams({ ...prevParams, id: favoritesId });
-        } else {
-            console.log('3')
-            setSearchParams({ perPage });
-        }
+        } 
+        // else {
+        //     console.log('3')
+        //     setSearchParams({ perPage });
+        // }
 
         prevPathPart.current = pathPart;
     }, [favoritesId, pathPart]);

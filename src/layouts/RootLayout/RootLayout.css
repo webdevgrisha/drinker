@@ -23,8 +23,13 @@
     justify-content: center;
     align-items: center;
     height: 3.5rem;
+}
+
+.root-header .logo>span {
     font-size: 24px;
     font-style: italic;
+    /* text-transform: uppercase; */
+    color: #403F3D;
 }
 
 .root-header .logo>.icon {

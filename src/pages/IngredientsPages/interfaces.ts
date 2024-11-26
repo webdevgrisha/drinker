@@ -28,7 +28,6 @@ interface IngredientData {
     description: string | null;
     id: number;
     imageUrl: string | null;
-    measure: string | null;
     name: string;
     percentage: string;
     type: string;

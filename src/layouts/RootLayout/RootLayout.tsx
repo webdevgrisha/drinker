@@ -12,7 +12,7 @@ function RootLayout() {
             <span className="icon">
               <SVG_Logo />
             </span>
-            Drinker
+            <span>Drinker</span>
           </div>
           <nav>
             <NavLink to="/cocktails">Cocktails</NavLink>

@@ -62,12 +62,16 @@ function CocktailModalWindow() {
     toggleLike();
   };
 
-  const cardClasses = classNames({ "cocktail-card": true, hide: isLoading });
+  const cardClasses = classNames({
+    "cocktail-card": true,
+    "modal-window-card": true,
+    hide: isLoading,
+  });
 
   const buttonText = isLiked ? "Remove form" : "Add to";
 
   return (
-    <div className="cocktail-wrapper">
+    <div className="coktail-modal-window modal-window-wrapper">
       {isLoading && <Loader />}
       <Card className={cardClasses}>
         <CardHeader className="section header">
@@ -77,7 +81,7 @@ function CocktailModalWindow() {
           <CardTitle className="title">{name}</CardTitle>
           <button className="close-btn" onClick={closeFunc}></button>
         </CardHeader>
-        <CardContent className="section cocktail-info">
+        <CardContent className="section modal-window-content cocktail-info ">
           <div className="ingredients">
             <h4>Ingredients</h4>
             <ul className="list">
@@ -99,7 +103,7 @@ function CocktailModalWindow() {
           </div>
           <div className="additional-info">
             <h4>Additional Info</h4>
-            <div className="cocktail-additional-info">
+            <div className="more-info cocktail-additional-info">
               <p>
                 <b>Category:</b> {category}
               </p>
