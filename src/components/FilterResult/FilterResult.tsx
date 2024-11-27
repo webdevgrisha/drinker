@@ -6,22 +6,26 @@ import { Button } from "@/components/ui/button";
 import "./FilterResult.css";
 import { useEffect } from "react";
 import useCustomSearchParams from "@/hooks/useCustomSearchParams";
+import { FilterFields } from "../interfaces";
 
 interface FilterData {
-  name?: string | null;
-  glass?: string | null;
-  category?: string | null;
-  alcoholic?: string | null;
-  sort?: string | null;
+  [key: string]: string | null;
 }
 
-function FilterResult() {
-  const [filterData, setFilterData] = useImmer<FilterData>({
-    name: null,
-    glass: null,
-    category: null,
-    alcoholic: null,
-    sort: null,
+interface FilterResultProps {
+  fields: FilterFields;
+  searchPlaceholder: string;
+}
+
+function FilterResult({ fields, searchPlaceholder }: FilterResultProps) {
+  const [filterData, setFilterData] = useImmer<FilterData>(() => {
+    const initObj: FilterData = { name: null };
+
+    Object.keys(fields).forEach(
+      (fieldName: string) => (initObj[fieldName] = null)
+    );
+
+    return initObj;
   });
 
   const [searchParams, setSearchParams] = useCustomSearchParams();
@@ -38,7 +42,7 @@ function FilterResult() {
       const filterOption = Object.keys(filterData) as Array<keyof FilterData>;
 
       filterOption.forEach((name) => {
-        draft[name] = searchParams.get(name);
+        draft[name] = searchParams.get(name.toString());
       });
     });
   }, [searchParams]);
@@ -46,55 +50,35 @@ function FilterResult() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const refactorObj: { [key: string]: string } = Object.fromEntries(
-      Object.entries(filterData).filter(([_, value]) => value !== null)
-    );
+    const refactorObj = Object.fromEntries(
+      Object.entries(filterData).filter(([, value]) => value !== null)
+    ) as {
+      [k: string]: string;
+    };
 
-    setSearchParams({ page: '1', ...refactorObj });
+    setSearchParams({ page: "1", ...refactorObj });
   };
 
   return (
     <form className="filter-result" onSubmit={handleSubmit}>
       <Input
         type="search"
-        placeholder="Search by cocktail name"
+        placeholder={searchPlaceholder}
         value={filterData.name || ""}
         className="search-name"
         onChange={(e) => handleFilterDataChange("name", e.target.value)}
       />
-      <CustomSelect
-        placeholder="Select a glass"
-        path="/cocktails/glasses"
-        value={filterData.glass || ""}
-        setValue={(value: string) => handleFilterDataChange("glass", value)}
-      />
-      <CustomSelect
-        placeholder="Select a categorie"
-        path="/cocktails/categories"
-        value={filterData.category || ""}
-        setValue={(value: string) => handleFilterDataChange("category", value)}
-      />
-      <CustomSelect
-        placeholder="Is Alcoholic"
-        options={["true", "false"]}
-        value={filterData.alcoholic || ""}
-        setValue={(value: string) => handleFilterDataChange("alcoholic", value)}
-      />
-      <CustomSelect
-        placeholder="Sort by"
-        options={[
-          "+name",
-          "-name",
-          "+alcoholic",
-          "-alcoholic",
-          "+category",
-          "-category",
-          "+glass",
-          "-glass",
-        ]}
-        value={filterData.sort || ""}
-        setValue={(value: string) => handleFilterDataChange("sort", value)}
-      />
+      {Object.entries(fields).map(([key, config]) => {
+        return (
+          <CustomSelect
+            placeholder={config.placeholder}
+            path={config.path}
+            options={config.options}
+            value={filterData[key] || ""}
+            setValue={(value: string) => handleFilterDataChange(key, value)}
+          />
+        );
+      })}
       <Button className="apply-filters">Filter</Button>
     </form>
   );

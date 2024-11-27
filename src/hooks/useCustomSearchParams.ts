@@ -17,7 +17,6 @@ function useCustomSearchParams(): [URLSearchParams, (newSearchParams: NewSearchP
     const pathPart: string = location.pathname.split("/")[1];
 
     useEffect(() => {
-        console.log('location useCustomSearchParams: ', location);
         const saveParams = localStorage.getItem(pathPart);
         const parsedParams = saveParams ? JSON.parse(saveParams) : {};
         if (pathPart === 'favourites') {

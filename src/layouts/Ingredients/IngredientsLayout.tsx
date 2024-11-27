@@ -1,17 +1,18 @@
 import { FilterResult } from "@/components";
 import "./IngredientsLayout.css";
 import { Outlet } from "react-router-dom";
+import filterFields from "./filterFields";
 
 function IngredientsLayout() {
   return (
-    <section className="cocktails">
+    <section className="page ingredients">
       <header>
         <h1>Ingredients</h1>
       </header>
       <section className="filter">
-        <FilterResult />
+        <FilterResult fields={filterFields} searchPlaceholder={"Search by ingredient name"} />
       </section>
-      <div className="cocktails-content">
+      <div className="ingredients-content">
         <Outlet />
       </div>
     </section>

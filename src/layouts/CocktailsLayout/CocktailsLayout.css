@@ -1,4 +1,4 @@
-.cocktails {
+.page {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -8,12 +8,12 @@
     gap: 50px;
 }
 
-.cocktails>header {
+.page>header {
     width: 100%;
     text-align: center;
 }
 
-.cocktails>header>h1 {
+.page>header>h1 {
     font-size: 32px;
     font-weight: bold;
     color: #403F3D;
