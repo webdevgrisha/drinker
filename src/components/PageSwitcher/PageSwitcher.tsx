@@ -39,12 +39,14 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
 
   const handlePageClick = (page: number) => {
     setSearchParams({
+      // ...Object.fromEntries(searchParams.entries()),
       page: page.toString(),
     });
   };
 
   const handlePerPageChange = (value: string) => {
     setSearchParams({
+      // ...Object.fromEntries(searchParams.entries()),
       perPage: value,
     });
   };

@@ -4,3 +4,9 @@
     row-gap: 20px;
     column-gap: 20px;
 }
+
+.emty-data {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}

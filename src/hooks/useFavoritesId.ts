@@ -6,6 +6,8 @@ function getCocktailsId() {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
 
+        if (key === null || isNaN(+(key))) continue;
+
         cocktailsId.push(key as string);
     }
 
@@ -15,8 +17,6 @@ function getCocktailsId() {
 
 function useFavoritesId() {
     const [cocktailsId, setCocktailsId] = useState<string[]>(() => getCocktailsId());
-
-    console.log('update!');
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -28,8 +28,6 @@ function useFavoritesId() {
         window.addEventListener("storage", handleStorageChange);
         return () => window.removeEventListener("storage", handleStorageChange);
     }, []);
-
-    console.log('cocktailsId: ', cocktailsId);
 
     if (cocktailsId.length === 0) return 'None';
 

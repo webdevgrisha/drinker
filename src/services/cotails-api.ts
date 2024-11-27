@@ -32,7 +32,7 @@ async function getData(endPoint: string) {
         const json = await response.json();
 
 
-        console.log(`${endPoint}:`, json);
+        // console.log(`${endPoint}:`, json);
 
         return json;
     } else {
@@ -40,9 +40,5 @@ async function getData(endPoint: string) {
     }
 
 }
-
-
-getData('/ingredients');
-getData('/ingredients/types');
 
 export default getCotails;

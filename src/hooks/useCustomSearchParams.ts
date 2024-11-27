@@ -1,6 +1,6 @@
 import { useLocation, useSearchParams } from "react-router-dom";
 import useFavoritesId from "./useFavoritesId";
-import { useEffect, useRef } from "react";
+import { useEffect, } from "react";
 
 interface NewSearchParams {
     [key: string]: string;
@@ -9,7 +9,6 @@ interface NewSearchParams {
 
 function useCustomSearchParams(): [URLSearchParams, (newSearchParams: NewSearchParams) => void] {
     const [searchParams, setSearchParams] = useSearchParams();
-    const prevPathPart = useRef<string | null>(null);
     const location = useLocation();
     const favoritesId = useFavoritesId();
 
@@ -17,31 +16,26 @@ function useCustomSearchParams(): [URLSearchParams, (newSearchParams: NewSearchP
     const perPage = searchParams.get('perPage') || '15';
     const pathPart: string = location.pathname.split("/")[1];
 
-    console.log('location useCustomSearchParams: ', location);
-
     useEffect(() => {
-        // console.log('call use effect');
-        if (pathPart === 'favourites' && prevPathPart.current !== 'favourites') {
-            console.log('1')
-            setSearchParams({ perPage, id: favoritesId });
-        } else if (pathPart === 'favourites' && prevPathPart.current === 'favourites') {
-            console.log('2')
-            const prevParams = Object.fromEntries(searchParams.entries())
-            setSearchParams({ ...prevParams, id: favoritesId });
-        } 
-        // else {
-        //     console.log('3')
-        //     setSearchParams({ perPage });
-        // }
+        console.log('location useCustomSearchParams: ', location);
+        const saveParams = localStorage.getItem(pathPart);
+        const parsedParams = saveParams ? JSON.parse(saveParams) : {};
+        if (pathPart === 'favourites') {
+            setCustomSearchParams(parsedParams);
+        } else {
+            setSearchParams(parsedParams);
+        }
 
-        prevPathPart.current = pathPart;
     }, [favoritesId, pathPart]);
 
     const setCustomSearchParams = (newSearchParams: NewSearchParams) => {
+        const newSearchParamsConfig = { page, perPage, ...newSearchParams }
         if (pathPart === 'favourites') {
-            setSearchParams({ id: favoritesId, page, perPage, ...newSearchParams });
+            setSearchParams({ id: favoritesId, ...newSearchParamsConfig });
+            localStorage.setItem(pathPart, JSON.stringify(newSearchParamsConfig));
         } else {
-            setSearchParams({ page, perPage, ...newSearchParams, });
+            setSearchParams(newSearchParamsConfig);
+            localStorage.setItem(pathPart, JSON.stringify(newSearchParamsConfig));
         }
     }
 

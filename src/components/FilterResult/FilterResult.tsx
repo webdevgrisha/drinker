@@ -21,7 +21,9 @@ function FilterResult() {
     glass: null,
     category: null,
     alcoholic: null,
+    sort: null,
   });
+
   const [searchParams, setSearchParams] = useCustomSearchParams();
 
   const handleFilterDataChange = (name: keyof FilterData, value: string) => {
@@ -31,12 +33,15 @@ function FilterResult() {
   };
 
   useEffect(() => {
+    console.log("run use effect");
     setFilterData((draft) => {
       const filterOption = Object.keys(filterData) as Array<keyof FilterData>;
 
-      filterOption.forEach((name) => (draft[name] = searchParams.get(name)));
+      filterOption.forEach((name) => {
+        draft[name] = searchParams.get(name);
+      });
     });
-  }, []);
+  }, [searchParams]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +50,7 @@ function FilterResult() {
       Object.entries(filterData).filter(([_, value]) => value !== null)
     );
 
-    setSearchParams(refactorObj);
+    setSearchParams({ page: '1', ...refactorObj });
   };
 
   return (
