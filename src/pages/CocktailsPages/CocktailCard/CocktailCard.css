@@ -1,0 +1,102 @@
+.card-preview {
+    /* text-align: center; */
+    /* justify-self: center;
+    align-self: center; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 40%;
+    height: 20rem;
+    border: 1px solid #C1B6AD;
+    border-radius: 30px;
+    padding-bottom: 10px;
+}
+
+.card-preview>.image {
+    width: 100%;
+    height: 15rem;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.card-preview>.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s all;
+}
+
+.card-preview:hover .image img {
+    transform: scale(1.1);
+}
+
+.card-preview>h4 {
+    color: #403F3D;
+    font-weight: 700;
+}
+
+.card-preview .category {
+    font-size: 14px;
+    color: #B0907A;
+    font-weight: 500;
+}
+
+.card-preview .heart {
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    top: 10px;
+
+    transition: 0.6s all;
+}
+
+.card-preview .heart svg {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    stroke: #292524;
+    stroke-width: 0.3px;
+}
+
+.card-preview .heart:hover svg {
+    filter: drop-shadow(0px 2px 4px rgba(255, 0, 0, 0.3));
+}
+
+.card-preview .heart:active svg {
+    transform: scale(0.9);
+    filter: drop-shadow(0px 1px 2px rgba(255, 0, 0, 0.7));
+}
+
+.card-preview .heart.hide {
+    opacity: 0;
+}
+
+.card-preview .heart.liked svg path {
+    fill: #dc2626;
+}
+
+.card-preview .heart svg path {
+    fill: #fff;
+    transition: fill 0.4s ease;
+}
+
+
+@media (max-width: 768px) {
+    .card-preview {
+        min-width: 90%;
+    }
+
+    .card-preview .heart.hide {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 560px) {
+    .cocktail-card-preview {
+        max-width: 80%;
+        /* min-width: 50%; */
+        place-self: center;
+    }
+}

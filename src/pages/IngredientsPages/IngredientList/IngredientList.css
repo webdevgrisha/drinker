@@ -1,0 +1,11 @@
+.ingredient-list {
+  justify-items: normal;
+  align-items: normal;
+}
+
+@media (max-width: 560px) {
+  .ingredient-list {
+    justify-items: center;
+    align-items: center;
+  }
+}
