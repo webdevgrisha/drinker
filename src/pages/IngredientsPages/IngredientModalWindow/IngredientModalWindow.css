@@ -80,6 +80,7 @@
     .modal-window-wrapper .ingredient {
         max-width: 55%;
         min-width: 40%;
+        min-height: 45vh;
     }
 
     .modal-window-wrapper .ingredient-modal-window .ingredient-content .ingredients {

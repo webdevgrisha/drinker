@@ -11,6 +11,11 @@
 
 .filter-result > .apply-filters {
     background-color: #1d4ed8;
+    transition: 0.4s background-color;
+
+    &:hover {
+        background-color: #2563eb;
+    }
 }
 
 @media (max-width: 1440px) {

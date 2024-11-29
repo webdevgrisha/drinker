@@ -1,6 +1,11 @@
 import { FilterFields } from "@/components/interfaces";
 
 const filterFields: FilterFields = {
+    'ingredientId': {
+        placeholder: "Main ingredient",
+        path: "/ingredients?perPage=1000",
+        parseKey: 'name',
+    },
     'glass': {
         placeholder: "Select a glass",
         path: "/cocktails/glasses",

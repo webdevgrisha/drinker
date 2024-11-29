@@ -8,7 +8,7 @@ import {
 
 import "../../style/MainCocktailModalWindow.css";
 import "./IngredientModalWindow.css";
-import getCotails from "@/services/cotails-api";
+import getData from "@/services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
@@ -17,7 +17,7 @@ import { IngredientData } from "../interfaces";
 
 async function getCard({ queryKey }: { queryKey: [string] }) {
   const [search] = queryKey;
-  const response = await getCotails(`/ingredients/${search}`);
+  const response = await getData(`/ingredients/${search}`);
 
   return response;
 }

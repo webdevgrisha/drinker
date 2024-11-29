@@ -3,6 +3,7 @@ interface FilterFields {
         placeholder: string;
         path?: string;
         options?: string[],
+        parseKey?: string,
     }
 }
 

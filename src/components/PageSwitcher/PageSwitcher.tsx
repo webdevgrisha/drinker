@@ -21,7 +21,6 @@ import {
 import "./PageSwitcher.css";
 import { PageData } from "../../pages/CocktailsPages/interfaces";
 import useCustomSearchParams from "@/hooks/useCustomSearchParams";
-import { Fragment } from "react/jsx-runtime";
 
 interface PageSwitcherProps {
   metaData: PageData | null;
@@ -40,14 +39,12 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
 
   const handlePageClick = (page: number) => {
     setSearchParams({
-      // ...Object.fromEntries(searchParams.entries()),
       page: page.toString(),
     });
   };
 
   const handlePerPageChange = (value: string) => {
     setSearchParams({
-      // ...Object.fromEntries(searchParams.entries()),
       perPage: value,
     });
   };

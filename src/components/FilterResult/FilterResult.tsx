@@ -70,9 +70,7 @@ function FilterResult({ fields, searchPlaceholder }: FilterResultProps) {
       {Object.entries(fields).map(([key, config]) => {
         return (
           <CustomSelect
-            placeholder={config.placeholder}
-            path={config.path}
-            options={config.options}
+            {...config}
             value={filterData[key] || ""}
             setValue={(value: string) => handleFilterDataChange(key, value)}
           />

@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import getCotails from "@/services/cotails-api";
+import getData from "@/services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
 
 interface CustomSelectProps {
@@ -16,6 +16,7 @@ interface CustomSelectProps {
   placeholder: string;
   path?: string;
   options?: (string | boolean)[];
+  parseKey?: string;
 }
 
 async function getDataForFilter({
@@ -25,7 +26,7 @@ async function getDataForFilter({
 }) {
   const [path] = queryKey;
 
-  const response = getCotails(`${path}`);
+  const response = getData(`${path}`);
 
   return response;
 }
@@ -36,20 +37,37 @@ function CustomSelect({
   path,
   placeholder,
   options = [],
+  parseKey,
 }: CustomSelectProps) {
-  const { data, error } = useQuery([path], getDataForFilter);
+  const { data, error, loading } = useQuery([path], getDataForFilter, {
+    enabled: !!path,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
 
-  const dataParse: undefined | string[] = data?.data;
+  let dataParse: undefined | [string, string][];
+
+  if (parseKey && !loading) {
+    dataParse = data?.data.map((dataObj: { [key: string]: string }) => [
+      dataObj.id,
+      dataObj[parseKey],
+    ]);
+  } else {
+    dataParse = data?.data.map((value: string) => [value, value]);
+  }
 
   const RenderSelectItems = () => {
-    const optionArr = path ? dataParse : options;
+    const refactorOptions = options?.map((value) => [value, value]);
+
+    const optionArr = path ? dataParse : refactorOptions;
 
     if (optionArr === undefined) return "Loading data";
 
-    return optionArr.map((option: string | boolean) => {
+    return optionArr.map(([key, value]) => {
       return (
-        <SelectItem value={String(option)}>
-          <span>{String(option)}</span>
+        <SelectItem value={String(key)} key={String(key)}>
+          <span>{String(value)}</span>
         </SelectItem>
       );
     });
@@ -64,6 +82,11 @@ function CustomSelect({
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
+        {loading && path !== undefined && (
+          <SelectLabel>
+            loading...
+          </SelectLabel>
+        )}
         <SelectGroup>
           <SelectLabel>
             {error && path !== undefined ? "Faild to load data" : placeholder}

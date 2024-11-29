@@ -98,7 +98,6 @@
     object-fit: fill;
 }
 
-
 @media (max-width: 1024px) {
     .modal-window-wrapper .modal-window-card .modal-window-content .additional-info p {
         font-size: 15px;
