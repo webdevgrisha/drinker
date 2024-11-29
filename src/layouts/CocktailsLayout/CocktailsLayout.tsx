@@ -1,4 +1,5 @@
 import { FilterResult } from "@/components";
+import "../style/Page.css";
 import "./CocktailsLayout.css";
 import { Outlet, useLocation } from "react-router-dom";
 

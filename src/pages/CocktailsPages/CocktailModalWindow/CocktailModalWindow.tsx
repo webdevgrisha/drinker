@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import "../../style/MainCocktailModalWindow.css";
 import "./CocktailModalWindow.css";
 import getCotails from "@/services/cotails-api";
 import { useQuery } from "@tanstack/react-query";

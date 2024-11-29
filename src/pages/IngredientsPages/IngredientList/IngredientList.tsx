@@ -1,3 +1,4 @@
+import "../../style/CardList.css";
 import "./IngredientList.css";
 import getCotails from "../../../services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
@@ -30,7 +31,7 @@ function IngredientList() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="card-list">
+        <div className="card-list ingredient-list">
           {cards.data.map((cocktailData) => {
             return <IngredientCard key={cocktailData.id} data={cocktailData} />;
           })}

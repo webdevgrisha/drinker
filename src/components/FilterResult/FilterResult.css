@@ -12,3 +12,44 @@
 .filter-result > .apply-filters {
     background-color: #1d4ed8;
 }
+
+@media (max-width: 1440px) {
+    .filter-result {
+        justify-content: center;
+    }
+} 
+
+@media (max-width: 1000px) {
+    .filter-result {
+        flex-wrap: wrap;
+    }
+} 
+
+@media (max-width: 768px) {
+    .filter-result {
+        flex-wrap: wrap;
+    }
+    .filter-result > .search-name {
+        max-width: 75%;
+    }
+} 
+
+@media (max-width: 768px) {
+    .filter-result > .search-name {
+        max-width: 75%;
+    }
+
+    .filter-result > .apply-filters {
+        width: 30%;
+    }
+} 
+
+@media (max-width: 500px) {
+    .filter-result > .search-name {
+        max-width: 90%;
+    }
+
+    .filter-result > .apply-filters {
+        width: 40%;
+    }
+} 

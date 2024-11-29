@@ -9,12 +9,21 @@ interface NewSearchParams {
 
 function useCustomSearchParams(): [URLSearchParams, (newSearchParams: NewSearchParams) => void] {
     const [searchParams, setSearchParams] = useSearchParams();
-    const location = useLocation();
+    const { pathname, search } = useLocation();
     const favoritesId = useFavoritesId();
 
     const page = searchParams.get('page') || '1';
     const perPage = searchParams.get('perPage') || '15';
-    const pathPart: string = location.pathname.split("/")[1];
+    const pathPart: string = pathname.split("/")[1];
+
+    console.log('useCustomSearchParams: ', location);
+
+    // useEffect(() => {
+    //     window.scrollTo({
+    //         top: 0,
+    //         behavior: "smooth",
+    //       });
+    // }, [pathname])
 
     useEffect(() => {
         const saveParams = localStorage.getItem(pathPart);
@@ -22,7 +31,7 @@ function useCustomSearchParams(): [URLSearchParams, (newSearchParams: NewSearchP
         if (pathPart === 'favourites') {
             setCustomSearchParams(parsedParams);
         } else {
-            setSearchParams(parsedParams);
+            setCustomSearchParams(parsedParams);
         }
 
     }, [favoritesId, pathPart]);

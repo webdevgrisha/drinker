@@ -1,0 +1,32 @@
+.card-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.emty-data {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .card-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .card-list {
+        grid-template-columns: 1fr;
+    }
+}

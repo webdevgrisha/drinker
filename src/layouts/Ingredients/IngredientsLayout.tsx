@@ -1,4 +1,5 @@
 import { FilterResult } from "@/components";
+import "../style/Page.css";
 import "./IngredientsLayout.css";
 import { Outlet } from "react-router-dom";
 import filterFields from "./filterFields";
@@ -10,9 +11,12 @@ function IngredientsLayout() {
         <h1>Ingredients</h1>
       </header>
       <section className="filter">
-        <FilterResult fields={filterFields} searchPlaceholder={"Search by ingredient name"} />
+        <FilterResult
+          fields={filterFields}
+          searchPlaceholder={"Search by ingredient name"}
+        />
       </section>
-      <div className="ingredients-content">
+      <div className="page-content ingredients-content">
         <Outlet />
       </div>
     </section>

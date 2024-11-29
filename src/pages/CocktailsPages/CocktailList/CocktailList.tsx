@@ -1,3 +1,4 @@
+import "../../style/CardList.css";
 import "./CocktailList.css";
 import { ResponseData } from "../interfaces";
 import getCotails from "../../../services/cotails-api";
@@ -17,15 +18,9 @@ async function getCards({ queryKey }: { queryKey: [string, string] }) {
 function CocktailList() {
   const location = useLocation();
 
-  console.log("location: ", location);
   const { search } = location;
 
-  console.log("CocktailList location: ", search);
-
-  const { data, isLoading, error } = useQuery(
-    ["cocktails", search],
-    getCards
-  );
+  const { data, isLoading, error } = useQuery(["cocktails", search], getCards);
 
   if (error) return <p>Error loading data.</p>;
 

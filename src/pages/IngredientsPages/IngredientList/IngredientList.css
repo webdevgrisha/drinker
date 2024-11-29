@@ -1,6 +1,4 @@
-.card-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 20px;
-    column-gap: 20px;
+.ingredient-list {
+  justify-items: center;
+  align-items: normal;
 }

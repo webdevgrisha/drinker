@@ -37,7 +37,6 @@ function FilterResult({ fields, searchPlaceholder }: FilterResultProps) {
   };
 
   useEffect(() => {
-    console.log("run use effect");
     setFilterData((draft) => {
       const filterOption = Object.keys(filterData) as Array<keyof FilterData>;
 

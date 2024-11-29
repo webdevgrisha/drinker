@@ -21,6 +21,7 @@ import {
 import "./PageSwitcher.css";
 import { PageData } from "../../pages/CocktailsPages/interfaces";
 import useCustomSearchParams from "@/hooks/useCustomSearchParams";
+import { Fragment } from "react/jsx-runtime";
 
 interface PageSwitcherProps {
   metaData: PageData | null;
@@ -117,7 +118,7 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
 
   return (
     <div className="page-switcher">
-      <Pagination>
+      <Pagination className="pagination">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -127,7 +128,15 @@ function PageSwitcher({ metaData }: PageSwitcherProps) {
             />
           </PaginationItem>
 
-          <RenderPaginationItem />
+          <div className="pagination-item-wrapper">
+            <RenderPaginationItem />
+          </div>
+
+          <div className="curr-page">
+            <PaginationItem>
+              <PaginationLink isActive={true}>{currentPage}</PaginationLink>
+            </PaginationItem>
+          </div>
 
           <PaginationItem>
             <PaginationNext

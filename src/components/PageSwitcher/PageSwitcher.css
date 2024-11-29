@@ -20,3 +20,34 @@
     font-size: 15px;
     font-weight: 600;
 }
+
+.page-switcher .pagination-item-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.page-switcher .curr-page {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .page-switcher {
+        flex-wrap: wrap;
+
+    }
+}
+
+@media (max-width: 600px) {
+    .page-switcher {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .page-switcher .pagination-item-wrapper {
+        display: none;
+    }
+
+    .page-switcher .curr-page {
+        display: flex;
+    }
+}

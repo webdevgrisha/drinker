@@ -1,4 +1,7 @@
 .card-preview {
+    /* text-align: center; */
+    /* justify-self: center;
+    align-self: center; */
     position: relative;
     display: flex;
     align-items: center;
@@ -77,4 +80,23 @@
 .card-preview .heart svg path {
     fill: #fff;
     transition: fill 0.4s ease;
+}
+
+
+@media (max-width: 768px) {
+    .card-preview {
+        min-width: 90%;
+    }
+
+    .card-preview .heart.hide {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 560px) {
+    .cocktail-card-preview {
+        max-width: 80%;
+        /* min-width: 50%; */
+        place-self: center;
+    }
 }

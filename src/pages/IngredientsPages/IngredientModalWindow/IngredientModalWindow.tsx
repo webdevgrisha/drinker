@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import "../../style/MainCocktailModalWindow.css";
 import "./IngredientModalWindow.css";
 import getCotails from "@/services/cotails-api";
 import { useQuery } from "@tanstack/react-query";
@@ -51,13 +52,13 @@ function IngredientModalWindow() {
   };
 
   const cardClasses = classNames({
-    ingredient: true,
+    "ingredient": true,
     "modal-window-card": true,
-    hide: isLoading,
+    "hide": isLoading,
   });
 
   return (
-    <div className="ingredient-modal-window modal-window-wrapper">
+    <div className="modal-window-wrapper ingredient-modal-window">
       {isLoading && <Loader />}
       <Card className={cardClasses}>
         <CardHeader className="section header ingredient-header">
@@ -105,7 +106,7 @@ function IngredientModalWindow() {
             )}
           </CardContent>
         )}
-        <CardFooter className="section footer">
+        <CardFooter className="section footer ingredient-footer">
           <button onClick={handleIngredientFilter}>
             Filter by this ingredient
           </button>
